@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abel A. Lebron Lopez - AI Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1F4E78;
+            --secondary: #2E5C8A;
+            --accent: #4A90E2;
+            --light-bg: #F0F4FF;
+            --text: #333;
+            --border: #CCCCCC;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: #f8f9fa;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 3rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-size: 1.8em;
+            margin-bottom: 0.5rem;
+        }
+
+        .logo p {
+            font-size: 0.95em;
+            opacity: 0.95;
+        }
+
+        nav {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        nav button {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+            padding: 0.7rem 1.2rem;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+
+        nav button:hover,
+        nav button.active {
+            background: white;
+            color: var(--primary);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+
+        section {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--accent);
+        }
+
+        h1 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 2.5em;
+            border-bottom: 3px solid var(--accent);
+            padding-bottom: 0.5rem;
+        }
+
+        h2 {
+            color: var(--secondary);
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.8em;
+        }
+
+        h3 {
+            color: var(--accent);
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        table {
+            width: 100%;
+            margin: 1.5rem 0;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border: 1px solid var(--border);
+        }
+
+        th {
+            background: var(--light-bg);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background: #fafafa;
+        }
+
+        pre {
+            background: #f5f5f5;
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        .stat-box {
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border-left: 4px solid var(--accent);
+        }
+
+        .stat-box strong {
+            color: var(--primary);
+        }
+
+        ul, ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight {
+            background: var(--light-bg);
+            padding: 0.3rem 0.6rem;
+            border-radius: 3px;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .reflection-box {
+            background: linear-gradient(135deg, #f5f7ff 0%, #e8eeff 100%);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary);
+            margin: 1.5rem 0;
+        }
+
+        .reflection-box strong {
+            color: var(--secondary);
+        }
+
+        .score-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .score {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .score-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .score-value {
+            font-size: 2.2em;
+            font-weight: bold;
+        }
+
+        .footer {
+            background: var(--primary);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        hr {
+            margin: 2rem 0;
+            border: 1px solid #ddd;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav {
+                gap: 0.5rem;
+            }
+
+            nav button {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.8em;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            h2 {
+                font-size: 1.4em;
+            }
+
+            .section-card {
+                padding: 1.5rem;
+            }
+
+            .score-card {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <h1>ICOM5015 Portfolio</h1>
+                <p>ICOM5015 Artificial Intelligence | Abel A. Lebron Lopez</p>
+            </div>
+            <nav>
+                <button class="nav-btn active" onclick="showSection('overview')">Overview</button>
+                <button class="nav-btn" onclick="showSection('exams')">Exams</button>
+                <button class="nav-btn" onclick="showSection('assignments')">Assignments</button>
+                <button class="nav-btn" onclick="showSection('quizzes')">Quizzes</button>
+                <button class="nav-btn" onclick="showSection('essays')">Essays</button>
+                <button class="nav-btn" onclick="showSection('teamwork')">Teamwork</button>
+                <button class="nav-btn" onclick="showSection('self')">Self-Assessment</button>
+                <button class="nav-btn" onclick="showSection('literature')">Literature</button>
+                <button class="nav-btn" onclick="showSection('apps')">Applications</button>
+                <button class="nav-btn" onclick="showSection('reflection')">Reflection</button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- OVERVIEW SECTION -->
+        <section id="overview" class="active">
+            <div class="section-card">
+                <h1>1. Course Overview</h1>
+                <p>Welcome to my ICOM5015 Artificial Intelligence Course Portfolio. My name is <span class="highlight">Abel A. Lebron Lopez</span>, and I am a sixth-year Computer Engineering student pursuing my bachelor's degree. As I approach the completion of my undergraduate studies, I recognize that artificial intelligence is a critical competency for modern computer engineers.</p>
+                <p>This portfolio documents my comprehensive engagement with AI concepts, techniques, and applications throughout this course. Through programming assignments, exams, and reflective work, I am building the expertise needed to design and implement intelligent systems in my professional career.</p>
+
+                <h2>Course Outcomes</h2>
+                <div class="stat-box">
+                    <strong>1. Describe, analyze and apply different AI techniques</strong> in intelligent agents: Search, Knowledge representation, inference, logic, and learning.
+                </div>
+                <div class="stat-box">
+                    <strong>2. Design an application of Artificial Intelligence</strong> using problem-solving methodologies.
+                </div>
+                <div class="stat-box">
+                    <strong>3. Review and discuss current AI literature</strong> and research trends.
+                </div>
+                <div class="stat-box">
+                    <strong>4. Write and present a demonstration</strong> of technical papers about AI.
+                </div>
+            </div>
+        </section>
+
+        <!-- EXAMS SECTION -->
+        <section id="exams">
+            <div class="section-card">
+                <h1>2. Exams</h1>
+
+                <h2>Exam Performance</h2>
+                <div class="score-card">
+                    <div class="score">
+                        <div class="score-label">Midterm Exam</div>
+                        <div class="score-value">85/88</div>
+                        <div class="score-label">96.59%</div>
+                    </div>
+                    <div class="score">
+                        <div class="score-label">Final Exam</div>
+                        <div class="score-value">98.59/100</div>
+                        <div class="score-label">98.59%</div>
+                    </div>
+                </div>
+
+                <h2>Midterm Analysis</h2>
+                <p>My strong midterm performance (96.59%) demonstrates comprehensive understanding of foundational AI concepts including intelligent agents, search algorithms, and knowledge representation. The exam covered chapters 1-4, and I performed particularly well on analytical problems.</p>
+                <div class="reflection-box">
+                    <strong>Key Insight:</strong> The analytical problems on LLMs and hybrid systems prompted me to think critically about how classical AI methods complement modern generative AI tools. This experience fundamentally shaped my understanding of intelligent system design.
+                </div>
+
+                <h2>Final Exam Analysis</h2>
+                <p>Exceptional performance on the final exam (98.59%) demonstrates mastery of all AI concepts covered throughout the course, from classical search and logic-based reasoning to modern machine learning and language models.</p>
+                <div class="reflection-box">
+                    <strong>Growth Reflection:</strong> The significant improvement from midterm to final shows my deepening understanding of advanced AI topics. Studying the role of LLMs in contemporary AI systems, combined with classical AI methods, has given me a sophisticated perspective on hybrid architectures.
+                </div>
+            </div>
+        </section>
+
+        <!-- ASSIGNMENTS SECTION -->
+        <section id="assignments">
+            <div class="section-card">
+                <h1>3. Programming Assignments</h1>
+                <p>Throughout ICOM5015, I completed five programming assignments that reinforced theoretical concepts through practical implementation. Each assignment challenged me to translate AI theory into working systems and analyze algorithm performance.</p>
+
+                <!-- ASSIGNMENT 1: VACUUM WORLD -->
+                <h2>Assignment 1: Vacuum World Agents</h2>
+
+                <h3>Objective</h3>
+                <p>Implement intelligent agents with different decision-making architectures operating in a vacuum world environment. Demonstrate understanding of the PEAS framework and compare reactive, state-based, and rational agent architectures.</p>
+
+                <h3>Key Implementation</h3>
+                <ul>
+                    <li><strong>Reflex Agent:</strong> Responds immediately to perceptions without state. Sucks when dirty, alternates direction when clean.</li>
+                    <li><strong>State-Based Reflex Agent:</strong> Tracks visited locations and obstacles. Avoids revisiting squares.</li>
+                    <li><strong>Rational Agent:</strong> Maintains comprehensive state with planning. Uses multi-step reasoning to maximize performance.</li>
+                </ul>
+
+                <h3>Results</h3>
+                <table>
+                    <tr>
+                        <th>Agent Type</th>
+                        <th>Environment</th>
+                        <th>Average Score</th>
+                        <th>Analysis</th>
+                    </tr>
+                    <tr>
+                        <td>Reflex Agent</td>
+                        <td>Simple 2-Location</td>
+                        <td>9.17</td>
+                        <td>Baseline - quick but limited</td>
+                    </tr>
+                    <tr>
+                        <td>Random Agent</td>
+                        <td>Simple 2-Location</td>
+                        <td>4.83</td>
+                        <td>Poor - no strategy</td>
+                    </tr>
+                    <tr>
+                        <td>State-Based Reflex</td>
+                        <td>Complex Grid</td>
+                        <td>-17.025</td>
+                        <td>Better obstacle avoidance</td>
+                    </tr>
+                    <tr>
+                        <td>Rational Agent</td>
+                        <td>Complex Grid</td>
+                        <td>-19.15</td>
+                        <td>Best overall - comprehensive planning</td>
+                    </tr>
+                </table>
+
+                <p><strong>Key Learning:</strong> Agent architecture dramatically affects performance. Simple reflex agents excel in familiar environments, while state-based and rational agents are necessary for complex, dynamic environments. Performance metrics drive design decisions.</p>
+
+                <hr>
+
+                <!-- ASSIGNMENT 2: SEARCH ALGORITHMS -->
+                <h2>Assignment 2: Search Algorithms</h2>
+
+                <h3>Objective</h3>
+                <p>Implement and compare multiple search algorithms (A* and BFS) for solving pathfinding and constraint satisfaction problems. Compare effectiveness on different problem domains.</p>
+
+                <h3>Exercises Completed</h3>
+
+                <h4>Exercise 3.9 - A* Search with Obstacles</h4>
+                <p>Implemented A* algorithm for shortest path through continuous 2D space with obstacles using Manhattan distance heuristic.</p>
+                <pre>
+Total states in reduced state space: 35
+Path found with A*:
+0 (0.8, 1.0)       ← Start
+34 (1.9, 1.65)
+9 (5.05, 2.1)
+13 (7.0, 4.55)
+15 (7.25, 5.4)
+1 (9.2, 5.7)        ← Goal
+Total path cost: 10.4499</pre>
+
+                <h4>Exercise 3.11 - Missionaries and Cannibals (BFS)</h4>
+                <p>Implemented breadth-first search to solve the classic puzzle where 3 missionaries and 3 cannibals must cross a river safely.</p>
+                <pre>
+(3, 3, 1)  ← Initial state
+(3, 1, 0)
+(3, 2, 1)
+(3, 0, 0)
+(3, 1, 1)
+(1, 1, 0)
+(2, 2, 1)
+(0, 2, 0)
+(0, 3, 1)
+(0, 1, 0)
+(1, 1, 1)
+(0, 0, 0)  ← Goal (11 steps)</pre>
+
+                <h3>Performance Analysis</h3>
+                <table>
+                    <tr>
+                        <th>Algorithm</th>
+                        <th>Problem</th>
+                        <th>Result</th>
+                        <th>Metric</th>
+                    </tr>
+                    <tr>
+                        <td>A* Search</td>
+                        <td>Shortest Path</td>
+                        <td>Path found</td>
+                        <td>Cost: 10.4499 | States: 35</td>
+                    </tr>
+                    <tr>
+                        <td>BFS</td>
+                        <td>Missionaries & Cannibals</td>
+                        <td>Goal reached</td>
+                        <td>11 steps | All constraints satisfied</td>
+                    </tr>
+                </table>
+
+                <p><strong>Key Insights:</strong> A* combines optimality with speed through effective heuristics. BFS guarantees shortest path in unweighted spaces. Algorithm choice depends on problem structure and optimality requirements.</p>
+
+                <hr>
+
+                <!-- ASSIGNMENT 3: MISSIONARIES & CANNIBALS -->
+                <h2>Assignment 3: Constraint Satisfaction & State Space Search</h2>
+
+                <h3>Objective</h3>
+                <p>Solve the Missionaries and Cannibals problem using BFS. Demonstrate state space search, constraint tracking, and solution path analysis.</p>
+
+                <h3>Problem Definition</h3>
+                <p>Three missionaries and three cannibals must cross a river using one boat. Constraints: (1) boat holds max 2 people, (2) cannibals never outnumber missionaries on either bank.</p>
+
+                <h3>Solution Path (11 Steps)</h3>
+                <pre>
+State Representation: (M_left, C_left, boat_side)
+boat_side: 1=left, 0=right
+
+Step 1:  (3, 3, 1) ← Initial
+Step 2:  (3, 1, 0) - Send 1C+1M right
+Step 3:  (3, 2, 1) - Send 1C left
+Step 4:  (3, 0, 0) - Send 2C right
+Step 5:  (3, 1, 1) - Send 1C left
+Step 6:  (1, 1, 0) - Send 2M right
+Step 7:  (2, 2, 1) - Send 1M+1C left
+Step 8:  (0, 2, 0) - Send 2M right
+Step 9:  (0, 3, 1) - Send 1C left
+Step 10: (0, 1, 0) - Send 2C right
+Step 11: (1, 1, 1) - Send 1C left
+Step 12: (0, 0, 0) ← Goal</pre>
+
+                <h3>Analysis</h3>
+                <p><strong>Search Strategy:</strong> Breadth-first search explored the state space systematically, guaranteeing the shortest solution path (11 steps).</p>
+                <p><strong>Constraint Propagation:</strong> State validity checked at each step: cannibals cannot outnumber missionaries on either bank.</p>
+                <p><strong>Key Learning:</strong> State space search is powerful for problems with clear state representations and transitions. BFS guarantees optimality for unweighted search spaces.</p>
+
+                <hr>
+
+                <!-- ASSIGNMENT 4: LOCAL SEARCH -->
+                <h2>Assignment 4: Local Search Algorithms</h2>
+
+                <h3>Objective</h3>
+                <p>Compare four local search algorithms on the 8-Puzzle and 8-Queens problems. Analyze tradeoffs between speed, reliability, and solution quality.</p>
+
+                <h3>Algorithms Tested</h3>
+                <ul>
+                    <li>Steepest-Ascent Hill Climbing - Direct but gets stuck in local maxima</li>
+                    <li>First-Choice Hill Climbing - Faster but suboptimal moves</li>
+                    <li>Random-Restart Hill Climbing - More reliable, escapes local optima</li>
+                    <li>Simulated Annealing - Temperature-scheduled acceptance of worse moves</li>
+                </ul>
+
+                <h3>Results Summary</h3>
+                <table>
+                    <tr>
+                        <th>Algorithm</th>
+                        <th>8-Puzzle Avg Cost</th>
+                        <th>8-Queens Avg Cost</th>
+                        <th>Reliability</th>
+                    </tr>
+                    <tr>
+                        <td>Steepest-Ascent</td>
+                        <td>2-5 states</td>
+                        <td>5-7 states</td>
+                        <td>Low</td>
+                    </tr>
+                    <tr>
+                        <td>First-Choice</td>
+                        <td>Similar to steepest</td>
+                        <td>Similar to steepest</td>
+                        <td>Low</td>
+                    </tr>
+                    <tr>
+                        <td>Random-Restart</td>
+                        <td>2.1-3.1 states</td>
+                        <td>0.26-0.47 states</td>
+                        <td>High</td>
+                    </tr>
+                    <tr>
+                        <td>Simulated Annealing</td>
+                        <td>Temperature dependent</td>
+                        <td>Accepts worse moves</td>
+                        <td>High</td>
+                    </tr>
+                </table>
+
+                <p><strong>Key Findings:</strong> Speed vs. Reliability tradeoff - basic hill climbing is fast but unreliable. Random-restart and simulated annealing sacrifice speed for consistency. No single algorithm is universally best; choice depends on problem structure and constraints.</p>
+
+                <hr>
+
+                <!-- ASSIGNMENT 5: CSP - ZEBRA PUZZLE -->
+                <h2>Assignment 5: Constraint Satisfaction Problems (CSP) - Zebra Puzzle</h2>
+
+                <h3>Objective</h3>
+                <p>Solve the Zebra Puzzle (Exercise 6.7) using CSP methodology with AC-3 constraint propagation. Demonstrate problem modeling, constraint encoding, and systematic solution through constraint propagation.</p>
+
+                <h3>Problem Setup</h3>
+                <p>Five houses with different colors, nationalities, drinks, candies, and pets. 14 clues determine a unique solution. Questions: (1) Who owns the zebra? (2) Who drinks water?</p>
+
+                <h3>CSP Formulation</h3>
+                <p><strong>25 Variables:</strong> One per (attribute, value) pair. Each represents: "In which house does this attribute-value combination occur?"</p>
+                <p><strong>Domain:</strong> Each variable ∈ {1, 2, 3, 4, 5}</p>
+                <p><strong>Constraints:</strong></p>
+                <ul>
+                    <li>5 Alldiff constraints (one per category)</li>
+                    <li>2 Unary: Norwegian = 1, Milk = 3</li>
+                    <li>8 Binary Equality: Englishman = Red, Spaniard = Dog, etc.</li>
+                    <li>1 Arithmetic: Green = Ivory + 1</li>
+                    <li>3 Adjacency: |Norwegian - Blue| = 1, |KitKat - Horse| = 1, |Hershey - Fox| = 1</li>
+                </ul>
+
+                <h3>Solution via AC-3 Propagation</h3>
+                <pre>
+================================================================================
+ZEBRA PUZZLE SOLUTION
+================================================================================
+
+House           1               2               3               4               5
+--------------------------------------------------------------------------------
+Color          yellow          blue            red             ivory           green
+Nationality    norwegian       ukrainian       englishman      spaniard        japanese
+Drink          water           tea             milk            oj              coffee
+Candy          kitkat          hershey         smarties        snickers        milkyway
+Pet            fox             horse           snails          dog             zebra
+
+================================================================================
+ANSWERS:
+================================================================================
+
+✓ The JAPANESE (house 5) owns the ZEBRA
+✓ The NORWEGIAN (house 1) drinks WATER
+
+================================================================================</pre>
+
+                <h3>Propagation Analysis</h3>
+                <p><strong>Step 1-2:</strong> Unary constraints (Norwegian=1, Milk=3) immediately reduce domains.</p>
+                <p><strong>Step 3-7:</strong> Adjacency and equality constraints cascade through the space, eliminating impossible assignments.</p>
+                <p><strong>Step 8-11:</strong> Remaining values determined uniquely through constraint interaction.</p>
+
+                <h3>Key Insights</h3>
+                <div class="reflection-box">
+                    <strong>Representation Drives Efficiency:</strong> Choosing (attribute, value) → house representation made most clues encode as binary constraints, perfect for AC-3. Poor representations would require complex logic or SAT encoding.
+                </div>
+
+                <div class="reflection-box">
+                    <strong>Propagation Power:</strong> AC-3 solved a space of 5^25 ≈ 10^17 possibilities through intelligent constraint propagation—no backtracking needed. This exemplifies how CSP methodology scales intelligently.
+                </div>
+
+                <p><strong>Conclusion:</strong> CSPs are powerful for logic puzzles and combinatorial problems. Declarative constraint specification combined with systematic propagation algorithms solves what would be intractable through brute-force search.</p>
+
+                <hr style="margin: 3rem 0;">
+
+                <h2>Overall Assignment Synthesis</h2>
+                <p><strong>Evolution of Problem-Solving:</strong> Assignments 1-5 progress from simple reactive agents to sophisticated constraint reasoning:</p>
+                <ul>
+                    <li><strong>Assignment 1:</strong> Agent decision-making and perception-action loops</li>
+                    <li><strong>Assignment 2-3:</strong> Systematic search through state spaces (uninformed and informed)</li>
+                    <li><strong>Assignment 4:</strong> Local optimization in large search spaces</li>
+                    <li><strong>Assignment 5:</strong> Constraint-based reasoning and logical deduction</li>
+                </ul>
+                <p>Each assignment built deeper understanding of AI problem-solving methodologies and their tradeoffs.</p>
+
+            </div>
+        </section>
+
+        <!-- QUIZZES SECTION -->
+        <section id="quizzes">
+            <div class="section-card">
+                <h1>4. Quizzes</h1>
+
+                <div class="score-card">
+                    <div class="score">
+                        <div class="score-label">Total Quizzes</div>
+                        <div class="score-value">26</div>
+                    </div>
+                    <div class="score">
+                        <div class="score-label">Average Score</div>
+                        <div class="score-value">65%</div>
+                    </div>
+                </div>
+
+                <p>I completed 26 quizzes throughout the course with an average score of 65%. While the average reflects the comprehensive challenge of the material, these quizzes served as valuable checkpoints for my understanding.</p>
+
+                <div class="reflection-box">
+                    <strong>Reflection:</strong> The quizzes effectively reinforced key concepts in each chapter, particularly regarding search algorithms, knowledge representation, and learning techniques. Consistent engagement with quiz material strengthened my problem-solving skills and prepared me for exams.
+                </div>
+            </div>
+        </section>
+
+        <!-- ESSAYS SECTION -->
+        <section id="essays">
+            <div class="section-card">
+                <h1>5. Essays and Forum Contributions</h1>
+
+                <h2>Forum Post 1: Intelligence vs Intellect</h2>
+                <p><strong>Date: January 26, 2026</strong></p>
+                <p>In this discussion, I explored the distinction between intelligence and intellect in both human and artificial contexts. I argued that intelligence encompasses learning, adaptation, and problem-solving, while intellect represents the deeper capacity for abstract reasoning.</p>
+                <div class="reflection-box">
+                    <strong>Relevance:</strong> This forum contribution directly relates to the key question: "Is AI real intelligence that is artificial?" My analysis highlighted that while AI systems can demonstrate intelligence through adaptation, the question of whether they possess true intellect remains philosophically open.
+                </div>
+
+                <h2>Forum Post 2: AI Agent for Course Registration</h2>
+                <p><strong>Date: February 28, 2026</strong></p>
+                <p>I proposed an AI agent called "Tarzan" that optimizes university course scheduling. This agent demonstrates practical application of AI concepts using utility-based learning and rational decision-making to maximize schedule quality.</p>
+
+                <h2>Forum Post 3: Spot's Navigation Using PEAS</h2>
+                <p><strong>Date: April 22, 2026</strong></p>
+                <p>I analyzed Boston Dynamics' Spot robot using the PEAS framework. This analysis demonstrated how classical AI concepts apply to modern robotics, showing that intelligent systems require sophisticated integration of perception, planning, and action.</p>
+
+                <h2>Team Essay: AI and Society</h2>
+                <p>As part of our group work, we completed a comprehensive analysis of AI's ethical, social, legal, and economic implications. This essay addressed critical questions about bias in AI systems, privacy concerns, and accountability.</p>
+            </div>
+        </section>
+
+        <!-- TEAMWORK SECTION -->
+        <section id="teamwork">
+            <div class="section-card">
+                <h1>6. Teamwork and Collaboration</h1>
+                <p>Throughout ICOM5015, I collaborated with Group A on multiple programming assignments and essays. Our team successfully completed assignments on search algorithms, local search, stochastic games, constraint satisfaction, and AI ethics.</p>
+
+                <h2>Key Lessons Learned</h2>
+                <div class="stat-box">
+                    <strong>Diverse Perspectives:</strong> Working with teammates exposed me to different problem-solving approaches and coding styles, enriching my understanding of AI implementation strategies.
+                </div>
+                <div class="stat-box">
+                    <strong>Communication & Documentation:</strong> Explaining complex AI concepts to teammates reinforced my own understanding and improved my technical communication skills.
+                </div>
+                <div class="stat-box">
+                    <strong>Division of Labor:</strong> Coordinating different aspects of projects taught me project management and the importance of clear task allocation in technical teams.
+                </div>
+            </div>
+        </section>
+
+        <!-- SELF-ASSESSMENT SECTION -->
+        <section id="self">
+            <div class="section-card">
+                <h1>7. Self-Assessment</h1>
+
+                <h2>Course Outcomes Achievement</h2>
+                <table>
+                    <tr>
+                        <th>Outcome</th>
+                        <th>Rating</th>
+                        <th>Assessment</th>
+                    </tr>
+                    <tr>
+                        <td>Describe, analyze and apply AI techniques</td>
+                        <td><strong>9/10</strong></td>
+                        <td>Strong competency in search algorithms, constraint satisfaction, knowledge representation</td>
+                    </tr>
+                    <tr>
+                        <td>Design an AI application</td>
+                        <td><strong>8/10</strong></td>
+                        <td>Successfully designed and implemented 5 AI applications in Python</td>
+                    </tr>
+                    <tr>
+                        <td>Review and discuss AI literature</td>
+                        <td><strong>8/10</strong></td>
+                        <td>Engaged with contemporary AI topics through forum discussions and essays</td>
+                    </tr>
+                    <tr>
+                        <td>Write and present technical papers</td>
+                        <td><strong>8/10</strong></td>
+                        <td>Demonstrated technical writing competency in forum posts and essays</td>
+                    </tr>
+                </table>
+
+                <h2>Strengths in AI</h2>
+                <ul>
+                    <li>Strong analytical and problem-solving skills (98.59% final exam)</li>
+                    <li>Solid programming ability to implement complex AI algorithms in Python</li>
+                    <li>Ability to connect theoretical concepts with practical applications</li>
+                    <li>Critical thinking about AI ethics and societal implications</li>
+                </ul>
+
+                <h2>Areas for Growth</h2>
+                <ul>
+                    <li>Deepening knowledge of modern machine learning frameworks and neural networks</li>
+                    <li>Gaining more hands-on experience with large language models and generative AI</li>
+                    <li>Developing expertise in hybrid AI systems combining classical and deep learning methods</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- LITERATURE SECTION -->
+        <section id="literature">
+            <div class="section-card">
+                <h1>8. Current AI Literature Review</h1>
+                <p>Throughout the course, I engaged with academic and professional literature on AI that informed my learning.</p>
+
+                <h2>Primary Course Materials</h2>
+                <div class="stat-box">
+                    <strong>Russell & Norvig - Artificial Intelligence: A Modern Approach (4th Edition)</strong><br>
+                    Comprehensive foundation covering search, knowledge representation, uncertainty, and learning. Effectively bridges classical AI theory with modern applications including LLMs.
+                </div>
+
+                <h2>Contemporary Topics Studied</h2>
+                <div class="stat-box">
+                    <strong>Large Language Models (LLMs) and Generative AI</strong><br>
+                    Studied transformer architectures and how they enable language understanding at scale. Connects to the broader question of whether LLMs demonstrate intelligence.
+                </div>
+                <div class="stat-box">
+                    <strong>Ethics and Responsible AI</strong><br>
+                    Engaged with literature on AI bias, privacy, and accountability. This reading deepened my understanding that AI design must account for societal impacts.
+                </div>
+            </div>
+        </section>
+
+        <!-- APPLICATIONS SECTION -->
+        <section id="apps">
+            <div class="section-card">
+                <h1>9. Applications and Demonstrations</h1>
+                <p>My programming assignments showcase practical AI applications demonstrating mastery of course concepts:</p>
+
+                <h2>Intelligent Agents for Automation</h2>
+                <p>The <strong>Tarzan course registration agent</strong> demonstrates how AI can optimize complex real-world problems using rational decision-making and utility functions to maximize scheduling quality.</p>
+
+                <h2>Robotics and Navigation</h2>
+                <p>Analysis of <strong>Boston Dynamics' Spot</strong> shows how classical AI concepts apply to cutting-edge robotics. The integration of perception, planning, and action demonstrates sophisticated multi-agent reasoning.</p>
+
+                <h2>Constraint Optimization</h2>
+                <p>CSP techniques apply to scheduling, resource allocation, and configuration problems across industries. Real-world applications span airlines, hospitals, and factories.</p>
+            </div>
+        </section>
+
+        <!-- REFLECTION SECTION -->
+        <section id="reflection">
+            <div class="section-card">
+                <h1>10. Portfolio Reflection Addendum</h1>
+
+                <h2>The Midterm Exam and LLMs: A Shift in Perspective</h2>
+                <p>At the beginning of this course, I viewed AI primarily through classical methods: search, logic, and expert systems. The midterm exam's analytical problems on LLMs and hybrid systems forced me to reconsider what intelligence means in an era of generative AI.</p>
+                <p>I learned that LLMs achieve impressive capabilities through statistical methods rather than explicit reasoning. This realization deepened my appreciation for hybrid systems that combine LLM capabilities with structured, verifiable reasoning processes.</p>
+
+                <h2>The Essay Question: Is AI Real Intelligence?</h2>
+                <p>Through my forum discussion and team essay, I grappled with this essential question. My analysis revealed that AI systems demonstrate <strong>functional intelligence</strong>—they adapt, learn, and solve problems effectively. However, whether they possess genuine understanding or consciousness remains philosophically open.</p>
+                <p>What became clear is that AI intelligence and human intellect differ fundamentally. This distinction shapes how we should design and deploy AI responsibly.</p>
+
+                <h2>Overall Learning: Integration and Responsibility</h2>
+                <p>Over ICOM5015, my understanding evolved from viewing AI as techniques to recognizing it as a framework for designing systems that interact responsibly with the real world. The combination of high exam scores (98.59% final), comprehensive programming assignments, and critical reflection on ethics has prepared me to implement AI responsibly.</p>
+                <div class="reflection-box">
+                    <strong>Key Takeaway:</strong> AI works best when we leverage its strengths—pattern recognition, optimization, rapid processing—while maintaining human oversight in domains requiring judgment, ethics, or accountability.
+                </div>
+
+                <h2>Acknowledgment of AI Use</h2>
+                <p>I used <span class="highlight">Claude</span> to help with brainstorming, clarifying ideas, revising wording, and organizing content for this portfolio reflection. The final organization, interpretation, examples, and conclusions are my own. I have reviewed and edited all content to ensure accuracy, originality, and consistency with course concepts and academic integrity expectations.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 Abel A. Lebron Lopez | ICOM5015 Artificial Intelligence Portfolio</p>
+        <p>University of Puerto Rico, Mayagüez Campus | Department of Electrical and Computer Engineering</p>
+    </footer>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Remove active class from all buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+
+            // Add active class to clicked button
+            event.target.classList.add('active');
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
